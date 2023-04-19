@@ -31,13 +31,13 @@ Userpath是一个基于session的用户路径分析开源项目，该框架能�
 ```bash
 node 14+
 java 8
-mysql 
+mysql5.7 
 ```
 ### 2.获取源码
 使用git工具获取源代码。
 
 ```bash
-git clone https://github.com/sessionpath/session.git
+git clone https://github.com/sessionpath/SessionAnalytics.git
 ```
 ### 3..编译及运行
 
