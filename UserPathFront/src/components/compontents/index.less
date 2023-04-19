@@ -1,0 +1,59 @@
+.group {
+  display: flex;
+  align-items: flex-start;
+  border-bottom: 1px solid #d9d9d9;
+  padding: 15px 10px 0 10px;
+  .group_lable {
+    min-width: 100px;
+    font-size: 18px;
+    color: rgb(127, 127, 127);
+  }
+  .group_content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    .group_content_item {
+      height: 32px;
+      line-height: 32px;
+      margin-bottom: 15px;
+      padding: 0 20px;
+      border: 1px solid #d9d9d9;
+      text-align: center;
+      font-family: "Microsoft Tai Le";
+      color: rgba(0, 0, 0, 0.647058823529412);
+      margin-left: 15px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .click {
+      border-color: rgba(1, 136, 251, 1);
+      background-color: rgba(1, 136, 251, 1);
+      color: #fff;
+    }
+  }
+}
+
+.itemBox {
+  background-color: #fff;
+  border-radius: 4px;
+  margin-top: 10px;
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    height: 56px;
+    .title {
+      font-family: "微软雅黑 Bold", "微软雅黑 Regular", "微软雅黑";
+      font-weight: 700;
+      font-style: normal;
+      font-size: 16px;
+      color: rgba(0, 0, 0, 0.847058823529412);
+    }
+  }
+}
+
+.spin {
+  height: 100%;
+}

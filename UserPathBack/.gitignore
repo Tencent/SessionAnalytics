@@ -1,0 +1,11 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea/
+*.iml
+*.class
+gen
+/out/
+classes
+target/
+drug-server/target
+drug-stub/target
+

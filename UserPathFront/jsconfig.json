@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "module": "commonjs",
+    "paths": {
+      "@/*": ["src/*"],
+      "@pub/*":["public/*"]
+    },
+    "jsx": "react-jsx",
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+  ],
+  "include": ["src/**/*.js", "src/**/*.jsx"],
+}

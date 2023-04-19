@@ -1,0 +1,152 @@
+.header {
+  width: 100%;
+  height: 53px;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  margin-bottom: 2px;
+  background-color: rgba(255, 255, 255, 1);
+  .logo {
+    margin: 0 0 0 10px;
+    & > img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+  }
+  .nav {
+    flex: 1;
+    display: flex;
+    flex-wrap: nowrap;
+    height: 53px;
+    position: relative;
+    top: 1px;
+    .nav_item {
+      margin: 8px 2px;
+      padding: 0 8px;
+      display: inline-block;
+      height: 37px;
+      font-weight: 600;
+      line-height: 37px;
+      box-sizing: border-box;
+      font-family: "微软雅黑";
+      color: #000000;
+      cursor: pointer;
+      position: relative;
+      &:hover {
+        background: rgba(59, 147, 180, 0.1);
+      }
+    }
+    .line {
+      &::before {
+        position: absolute;
+        content: "";
+        right: -2px;
+        top: 50%;
+        margin-top: -8px;
+        height: 16px;
+        border-left: 1px solid #000;
+      }
+    }
+    .click {
+      color: #3b93b4;
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -9px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #3b93b4;
+      }
+    }
+  }
+  .user {
+    display: flex;
+    align-items: center;
+    .user_name {
+      margin: 0 15px 0 10px;
+      cursor: pointer;
+    }
+  }
+}
+
+.switch {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  padding-left: 40px;
+  font-family: "微软雅黑";
+  color: #000000;
+  background-color: #fff;
+  border-bottom: 1px solid #d9d9d9;
+  box-sizing: border-box;
+  .commTree {
+    margin-left: 20px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    border: 1px solid #3b93b4;
+    border-radius: 4px;
+    color: #3b93b4;
+    cursor: pointer;
+  }
+}
+.commTree {
+  margin-right: 10px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  border: 1px solid #3b93b4;
+  border-radius: 4px;
+  color: #3b93b4;
+  cursor: pointer;
+  .commTree_name {
+    width: 120px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}
+
+.main {
+  width: 100%;
+  box-sizing: border-box;
+  height: calc(100% - 55px);
+  display: flex;
+  flex-direction: column;
+}
+
+.body {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drawer {
+  color: #fff;
+  :global {
+    .ant-drawer-mask {
+      background: inherit;
+    }
+    .ant-drawer-content {
+      background: rgba(27, 27, 27, 0.75);
+    }
+    .ant-drawer-header {
+      display: none;
+    }
+    .ant-drawer-content-wrapper {
+      width: 580px !important;
+    }
+  }
+  .drawer_title {
+    margin-bottom: 50px;
+  }
+}

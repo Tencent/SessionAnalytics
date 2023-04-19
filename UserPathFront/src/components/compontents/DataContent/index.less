@@ -1,0 +1,108 @@
+.article {
+  width: 100%;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  height: auto;
+}
+
+.data_content {
+  flex: 0 0 auto;
+  margin-top: 10px;
+  margin-left: 10px;
+  position: relative;
+  overflow: hidden;
+  width: 500px;
+  background-color: #fff;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  .content_top {
+    font-size: 10px;
+    font-weight: 400;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    .content_top_titleDiv {
+      display: flex;
+      flex-direction: column;
+      .content_top_title {
+        font-size: 16px;
+        font-weight: 700;
+        font-family: "微软雅黑";
+        margin-bottom: 5px;
+      }
+      .content_top_subtitle {
+        font-size: 10px;
+        color: gray;
+        font-weight: 400;
+        white-space: pre-line;
+      }
+    }
+    .subTitle_reset {
+      font-size: 16px;
+      cursor: pointer;
+    }
+  }
+  :global {
+    .ant-spin-nested-loading {
+      height: 100%;
+    }
+    .ant-spin-container {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+.content_echart {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  .content_radio {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    :global {
+      .ant-radio-wrapper {
+        margin-right: 30px;
+      }
+    }
+  }
+  .content_echart_comm {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.titleStyle {
+  font-size: 16px;
+  color: #3b93b4;
+  margin: 20px 0 10px 0;
+  display: -webkit-box;
+}
+.closeIcon {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  cursor: pointer;
+  font-size: 35px;
+  transform: rotate(90px);
+  font-weight: 900;
+  color: #d9d9d9;
+}
+.openIcon {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  cursor: pointer;
+  font-size: 35px;
+  transform: rotate(90px);
+  font-weight: 900;
+  color: #d9d9d9;
+}

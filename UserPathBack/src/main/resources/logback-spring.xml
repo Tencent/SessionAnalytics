@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- 定义日志文件 输入位置 -->
+    <property name="log_dir" value="/dockerdata/logs/userpath" />
+    <!-- 日志最大的历史 30天 -->
+    <!--    <property name="maxHistory" value="30"/>-->
+
+    <!-- 打印传参 -->
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE"/>
+
+    <appender name="polarisAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+            <evaluator> <!-- 默认为 ch.qos.logback.classic.boolex.JaninoEventEvaluator -->
+                <expression>
+
+                    return false;
+
+                </expression>
+            </evaluator>
+            <OnMatch>ACCEPT</OnMatch>
+            <OnMismatch>DENY</OnMismatch>
+        </filter>
+        <encoder>
+            <pattern>
+                [%thread] %caller{1} %d{yyyy-MM-dd HH:mm:ss.SSS} [%-4level]  %logger{36} - %msg%n
+            </pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log_dir}/polaris.%d.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="schedulerAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+            <evaluator> <!-- 默认为 ch.qos.logback.classic.boolex.JaninoEventEvaluator -->
+                <expression>
+                    if(logger.startsWith("com.session.path.data.userpath.scheduler"))
+                    return true;
+                    return false;
+
+                </expression>
+            </evaluator>
+            <OnMatch>ACCEPT</OnMatch>
+            <OnMismatch>DENY</OnMismatch>
+        </filter>
+        <encoder>
+            <pattern>
+                [%thread] %caller{1} %d{yyyy-MM-dd HH:mm:ss.SSS} [%-4level]  %logger{36} - %msg%n
+            </pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log_dir}/scheduler.%d.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>
+                [%thread] %caller{1} %d{yyyy-MM-dd HH:mm:ss.SSS} [%-4level]  %logger{36} - %msg%n
+            </pattern>
+        </layout>
+    </appender>
+
+    <appender name="infoLogFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+            <evaluator> <!-- 默认为 ch.qos.logback.classic.boolex.JaninoEventEvaluator -->
+                <expression>
+                    return false;
+
+                </expression>
+            </evaluator>
+            <OnMatch>ACCEPT</OnMatch>
+            <OnMismatch>DENY</OnMismatch>
+        </filter>
+
+        <encoder>
+            <pattern>
+                [%thread] %caller{1} %d{yyyy-MM-dd HH:mm:ss.SSS} [%-4level]  %logger{36} - %msg%n
+            </pattern>
+        </encoder>
+        <!-- 滚动策略 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log_dir}/info.%d.log</fileNamePattern>
+        </rollingPolicy>
+        <!--        <maxHistory>${maxHistory}</maxHistory>-->
+    </appender>
+
+    <appender name="errorLogFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %caller{1} %-5level %logger{36} - %msg%n
+            </pattern>
+        </encoder>
+        <!-- 滚动策略 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log_dir}/error.%d.log</fileNamePattern>
+        </rollingPolicy>
+        <!--        <maxHistory>${maxHistory}</maxHistory>-->
+    </appender>
+    <!-- DEBUG级别日志 appender -->
+    <appender name="DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 过滤器，只记录DEBUG级别的日志 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 按天回滚 daily -->
+            <fileNamePattern>${log_dir}/debug.%d.log
+            </fileNamePattern>
+            <!-- 日志最大的历史 60天 -->
+            <!--            <maxHistory>${maxHistory}</maxHistory>-->
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="polarisAppender"/>
+        <appender-ref ref="schedulerAppender"/>
+        <appender-ref ref="consoleLog"/>
+        <appender-ref ref="infoLogFile"/>
+        <appender-ref ref="errorLogFile"/>
+    </root>
+</configuration>

@@ -1,0 +1,199 @@
+.layout {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  position: relative;
+  display: flex;
+  .bg {
+    position: absolute;
+    width: 100%;
+    height: 220px;
+    background: url("../../images/login_bg.png");
+  }
+  .login {
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgb(0 0 0 / 35%);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    z-index: 10;
+    & > img {
+      width: 82px;
+      height: 74px;
+    }
+    .headline {
+      text-align: center;
+      & > span {
+        font-family: "微软雅黑 Bold", "微软雅黑";
+        font-weight: 700;
+        font-style: normal;
+        font-size: 24px;
+        line-height: 28px;
+        margin-top: 10px;
+        &:first-of-type {
+          color: #ff780d;
+        }
+        &:last-of-type {
+          color: #0396b7;
+        }
+      }
+    }
+    .form {
+      margin-top: 20px;
+    }
+    .bind {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: end;
+      & > div {
+        & > span {
+          margin-left: 5px;
+        }
+      }
+      span {
+        font-family: "微软雅黑";
+        font-weight: 400;
+        font-style: normal;
+        font-size: 14px;
+        color: #0396b7;
+        cursor: pointer;
+      }
+    }
+  }
+  .head {
+    width: 100%;
+    height: 53px;
+    border-bottom: 1px solid #d9d9d9;
+    & > img {
+      width: 224px;
+      height: 100%;
+      margin-left: 50px;
+      display: block;
+    }
+  }
+  .section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    .register {
+      width: 1200px;
+      height: 650px;
+      padding: 30px 20px;
+      box-shadow: 0px 0px 5px rgb(0 0 0 / 5%);
+      margin-top: 50px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      .register_back {
+        width: 100%;
+        cursor: pointer;
+        text-align: right;
+        font-family: "微软雅黑";
+        font-weight: 400;
+        font-style: normal;
+        line-height: 28px;
+        font-size: 12px;
+        & > span {
+          color: rgb(0, 193, 222);
+        }
+      }
+      .form_title {
+        font-family: "微软雅黑";
+        font-weight: 400;
+        font-style: normal;
+        font-size: 28px;
+        margin-bottom: 20px;
+      }
+    }
+    .result {
+      justify-content: center;
+      & > img {
+        width: 73px;
+        height: 79px;
+        display: block;
+      }
+      & > p:first-of-type {
+        font-size: 24px;
+        line-height: 36px;
+        font-family: "微软雅黑";
+        color: #666666;
+      }
+      & > p:nth-of-type(2) {
+        font-size: 16px;
+        line-height: 36px;
+        font-family: "微软雅黑 Regular", "微软雅黑";
+        font-weight: 400;
+        text-decoration: none;
+        color: #999999;
+      }
+      &>p:last-of-type{
+        font-family: '微软雅黑 Regular', '微软雅黑';
+        font-weight: 400;
+        font-style: normal;
+        font-size: 16px;
+        color: #00C1DE;
+        margin-top: 10px;
+        cursor: pointer;
+      }
+    }
+  }
+  :global {
+    .ant-form-item-control-input {
+      min-height: 50px;
+    }
+    .ant-input-prefix {
+      margin-right: 10px;
+    }
+    .ant-input {
+      font-family: "微软雅黑";
+      line-height: 40px;
+      font-size: 16px;
+      color: #999999;
+      letter-spacing: 1px;
+    }
+    .ant-input-affix-wrapper {
+      padding: 5px 11px;
+    }
+    .ant-btn {
+      height: 40px;
+      font-size: 14px;
+    }
+    .ant-btn-primary {
+      line-height: 24px;
+      border-radius: 4px;
+    }
+    .ant-input-affix-wrapper {
+      font-size: 14px;
+    }
+    .ant-form-item-explain, .ant-form-item-extra{
+      font-size: 14px;
+    }
+  }
+  .hint {
+    height: 50px;
+    line-height: 50px;
+    position: absolute;
+    left: 400px;
+    top: 50%;
+    margin-top: -25px;
+    font-size: 14px;
+    width: max-content;
+    color: #f04844;
+    & > img {
+      width: 14px;
+      height: 14px;
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+  }
+}
+
+.flex {
+  align-items: center;
+  justify-content: center;
+}
+.direction {
+  flex-direction: column;
+}

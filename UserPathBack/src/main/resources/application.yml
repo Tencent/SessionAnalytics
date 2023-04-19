@@ -1,0 +1,59 @@
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 500MB
+      max-request-size: 500MB
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username:
+    password:
+    url: jdbc:mysql://x.x.x.x:3306/db?serverTimezone=CTT&useSSL=false&useUnicode=true&characterEncoding=utf-8
+    tomcat:
+      #最大连接等待超时时间
+      max-wait: 10000
+      #初始化连接数
+      initialSize: 1
+      #最大活跃数
+      max-active: 30
+      test-on-borrow: true
+    hikari:
+      minimumIdle: 20
+      maximumPoolSize: 500
+      idleTimeout: 120000
+      connectionTimeout: 800000
+      leakDetectionThreshold: 600000
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQLDialect
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+    content-type: text/html
+    mode: HTML5
+  redis:
+    host:
+    port:
+    password:
+    timeout: 600     #连接超时时间（毫秒）
+    pool:
+      max-active: 8   #连接池最大连接数（使用负值表示没有限制）
+      max-wait: -1    # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      max-idle: 8     #连接池中的最大空闲连接
+      min-idle: 0     #连接池中的最小空闲连接
+http:
+  port: 8080
+server:
+  servlet:
+    context-path: /
+  tomcat:
+    accept-count: 200
+    max-connection: 10000
+    min-spare-threads: 20
+scheduler:
+  0/10 * * * * ?

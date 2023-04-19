@@ -1,0 +1,132 @@
+.commandLine {
+  height: 100%;
+  padding: 0px 10px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  .step {
+    display: flex;
+    height: 200px;
+    padding-bottom: 40px;
+    justify-content: center;
+    .step_item {
+      display: flex;
+      align-items: center;
+      width: 250px;
+      position: relative;
+      img {
+        display: block;
+        width: 19px;
+        height: 19px;
+      }
+      .step_item_line {
+        height: 1px;
+        flex: 1;
+        background-color: #d7d7d7;
+      }
+      .step_item_content {
+        position: absolute;
+        width: 180px;
+        top: 55%;
+        left: -32%;
+        text-align: center;
+        p {
+          font-family: "微软雅黑";
+          font-weight: 400;
+          font-style: normal;
+          text-decoration: none;
+          color: #999999;
+          font-size: 12px;
+          line-height: 22px;
+        }
+        & > p:first-of-type {
+          font-family: "微软雅黑 Bold", "微软雅黑";
+          font-weight: 700;
+          color: #666666;
+        }
+      }
+      &:last-of-type {
+        .step_item_line {
+          display: none;
+        }
+      }
+    }
+  }
+  .imgcontent {
+    padding: 20px 0 40px 40px;
+    .processBox {
+      display: flex;
+      align-items: center;
+      .processItem {
+        width: 253px;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        background-color: rgba(247, 247, 247, 1);
+        position: relative;
+        background: url("../../images/gray.svg") 0 0/100% 100% no-repeat
+          content-box;
+        margin-left: -20px;
+        &:first-of-type {
+          z-index: 5;
+        }
+        &:nth-of-type(2) {
+          z-index: 4;
+        }
+        &:nth-of-type(3) {
+          z-index: 3;
+        }
+        &:last-of-type {
+          z-index: 2;
+        }
+      }
+      .click {
+        background: url("../../images/tencentbule.png") 0 0/100% 100% no-repeat
+          content-box;
+        color: #fff;
+      }
+    }
+    .imgbox {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      & > img {
+        max-width: 1172px;
+        max-height: 701px;
+        display: block;
+        margin-top: 20px;
+      }
+    }
+  }
+  .carousel {
+    flex: 1;
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    :global {
+      .ant-carousel {
+        width: 1200px;
+        height: 600px;
+      }
+      .ant-carousel .slick-slide {
+        text-align: center;
+        background: #364d79;
+      }
+      .ant-carousel .slick-slide img {
+        width: 100%;
+        margin: 0;
+      }
+      .ant-carousel .slick-dots li button {
+        background-color: #3b93b4;
+      }
+      .ant-carousel .slick-prev,
+      .ant-carousel .slick-next,
+      .ant-carousel .slick-prev:hover,
+      .ant-carousel .slick-next:hover {
+        font-size: inherit;
+        color: currentColor;
+      }
+    }
+  }
+}

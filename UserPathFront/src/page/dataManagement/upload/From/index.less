@@ -1,0 +1,44 @@
+.from {
+  height: 100%;
+  box-sizing: border-box;
+  margin: 30px;
+  background-color: #fff;
+  .top {
+    height: 86px;
+    line-height: 86px;
+    padding-left: 20px;
+    font-family: 'Microsoft Tai Le Bold', 'Microsoft Tai Le';
+    font-weight: 700;
+    font-style: normal;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.847058823529412);
+    border-bottom: 1px solid #d9d9d9;
+  }
+  .from_content{
+    padding:20px;
+    :global{
+      .ant-row{
+        margin-bottom: 15px;
+      }
+    }
+  }
+  .uploadbox{
+    width: 100%;
+    position: relative;
+    .upload_drag{
+      .upload_drag_icon{
+        font-size: 48px;
+        color: #3B93B4;
+      }
+      &>p:last-of-type{
+        color: rgba(0, 0, 0, 0.447058823529412);
+      }
+    }
+    :global{
+      .ant-modal{
+        min-width: 1000px !important;
+      }
+    }
+  }
+}
+

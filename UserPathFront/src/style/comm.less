@@ -1,0 +1,213 @@
+/*
+ * Tencent is pleased to support the open source community by making SessionAnalytics-用户路径分析框架 available.
+ *
+ * Copyright (C) 2023 THL A29 Limited, a Tencent company.  All rights reserved. The below software in this distribution may have been modified by THL A29 Limited ("Tencent Modifications"). All Tencent Modifications are
+ * Copyright (C) THL A29 Limited.
+ * SessionAnalytics-用户路径分析框架 is licensed under the MIT License except for the third-party components listed below.
+ */
+.main_content {
+  height: 100%;
+  margin: 0px 10px 10px 10px;
+  box-sizing: border-box;
+  .detail_table {
+    padding: 0 20px;
+    margin-top: 10px;
+  }
+  .range {
+    padding: 20px 30px;
+  }
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 10px 0 10px;
+  box-sizing: border-box;
+  .conetnt_form {
+    width: 100%;
+    background-color: #fff;
+    box-sizing: border-box;
+    padding: 24px 10px 0px 10px;
+    .form_item_box {
+      padding: 15px;
+      border: 2px solid #d3d3d3;
+      border-radius: 4px;
+    }
+  }
+}
+
+.echartCard {
+  flex: 1;
+  width: 100%;
+  background-color: #fff;
+  margin-top: 10px;
+  border-radius: 4px;
+  padding: 10px 10px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  .searchechartCardTitle,
+  .echartCardTitle {
+    font-family: "微软雅黑";
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+  }
+  .setheight {
+    height: 50px;
+    margin-bottom: 20px;
+  }
+  .echartCardTitle {
+    justify-content: space-between;
+    align-items: center;
+  }
+  .subechartCardTitle {
+    font-size: 10px;
+    color: gray;
+    font-weight: 400;
+    margin: -30px 0 10px 0;
+    white-space: pre-line;
+  }
+  .echart_main {
+    width: 100%;
+    height: 670px;
+    overflow-y: auto;
+    .fullScreen {
+      background-color: #fff;
+    }
+    :global {
+      .fullscreen-enabled {
+        background-color: #fff;
+        overflow-y: auto;
+      }
+    }
+  }
+  .combo {
+    display: flex;
+    align-items: center;
+    height: 146px;
+    justify-content: space-between;
+    padding: 0 50px;
+    .combo_title {
+      font-family: "微软雅黑";
+      font-weight: 400;
+      font-style: normal;
+      font-size: 16px;
+      color: rgba(0, 0, 0, 0.996078431372549);
+    }
+    .combo_value {
+      font-family: "微软雅黑";
+      font-weight: 400;
+      font-style: normal;
+      font-size: 36px;
+    }
+  }
+  .maCombo {
+    justify-content: space-evenly;
+    padding: 0;
+    .maCombo_item {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+  }
+  .functional {
+    position: absolute;
+    right: 20px;
+    top: -0px;
+    cursor: pointer;
+    display: none;
+    .functional_icon {
+      padding: 5px;
+      background-color: #fff;
+      font-size: 16px;
+      font-weight: 900;
+      margin-left: 10px;
+      border: 1px solid #d9d9d9;
+    }
+  }
+  &:hover .functional {
+    display: block;
+  }
+}
+
+.pie {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 10px;
+  overflow: hidden;
+  .pie_item {
+    width: 630px;
+  }
+}
+.gaugeview {
+  display: grid;
+  grid-template-columns: repeat(3, 400px);
+  grid-column-gap: 30px;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+  .gaugeview_item {
+    width: 300px;
+  }
+}
+.pieview {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  & > div:first-of-type {
+    margin-right: 5px;
+  }
+  & > div:last-of-type {
+    margin-left: 5px;
+  }
+  .pieview_item {
+    width: 50%;
+    box-sizing: border-box;
+    flex: 1;
+  }
+}
+
+.boxplotBox {
+  position: absolute;
+  padding: 20px;
+  background-color: #fff;
+  top: 30%;
+  right: 20%;
+  border-radius: 3px;
+  font-size: 14px;
+  box-shadow: rgb(174, 174, 174) 0px 0px 10px;
+}
+
+
+.chord_tootip {
+  padding: 10px;
+  border-radius: 5px;
+  & > div:first-of-type {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    height: 30px;
+    i {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+  }
+  & > p {
+    margin-left: 20px;
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
+
+.chordRight {
+  display: flex;
+  align-items: center;
+  .tile_switch {
+    font-size: 16px;
+    font-weight: 400;
+  }
+}

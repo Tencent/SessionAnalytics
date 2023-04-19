@@ -1,0 +1,26 @@
+
+
+.rangeInput{
+  display: flex;
+  align-items: flex-start;
+  .formline {
+    width: 10px;
+    height: 32px;
+    margin: 0 5px;
+    position: relative;
+    &::after{
+      position: absolute;
+      content: "";
+      width: inherit;
+      border: 1px solid #d3d3d3;
+      top: 50%;
+      right: 0;
+    }
+  }
+  .formItem{
+    flex: 1;
+  }
+  .numberWidth {
+    width: 100%;
+  }
+}
