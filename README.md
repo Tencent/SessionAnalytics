@@ -9,7 +9,7 @@ Userpath是一个基于session的用户路径分析开源项目，该框架能�
 
 ### 用户路径分析框架模块功能：
 
-<img width="" src="/uploads/CB8793CA0454461FBDEEC3231095786A/image.png" alt="image.png" />
+![image](https://user-images.githubusercontent.com/34958046/233021850-48f7427d-0ac9-48a5-82e8-80960e0f26df.png)
 
 
 ### 用户行为分析：Event(事件) vs Session(会话)
