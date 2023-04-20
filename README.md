@@ -14,7 +14,8 @@ SessionAnalytics是一个基于session的用户路径分析开源项目，该框
 
 ### 用户行为分析：Event(事件) vs Session(会话)
 
-<img width="900" alt="d630452f-23c9-456f-8fc3-516a1a281c2a" src="https://user-images.githubusercontent.com/34958046/226225987-96ba4c9b-f919-49e0-9103-a3cb59bb5a55.png">
+![image](https://user-images.githubusercontent.com/34958046/233310766-888425d9-b772-4655-9d6b-9b0212b5e0f6.png)
+
 
 ### 接口设计：
 
