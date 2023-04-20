@@ -37,7 +37,7 @@ mysql5.7
 使用git工具获取源代码。
 
 ```bash
-git clone https://github.com/sessionpath/SessionAnalytics.git
+git clone https://github.com/Tencent/SessionAnalytics.git
 ```
 ### 3..编译及运行
 
