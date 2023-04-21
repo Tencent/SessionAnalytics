@@ -1,8 +1,9 @@
 /*
  * Tencent is pleased to support the open source community by making SessionAnalytics-用户路径分析框架 available.
  *
- * Copyright (C) 2023 THL A29 Limited, a Tencent company.  All rights reserved. The below software in this distribution may have been modified by THL A29 Limited ("Tencent Modifications"). All Tencent Modifications are
- * Copyright (C) THL A29 Limited.
+ * Copyright (C) 2023 THL A29 Limited, a Tencent company.  All rights reserved.
+ * The below software in this distribution may have been modified by THL A29 Limited ("Tencent Modifications").
+ * All Tencent Modifications are Copyright (C) THL A29 Limited.
  * SessionAnalytics-用户路径分析框架 is licensed under the MIT License except for the third-party components listed below.
  */
 import React, { useState, useEffect, useMemo } from "react";
@@ -397,7 +398,7 @@ const Screens = (props) => {
 
   useEffect(() => {
     document.getElementsByClassName("echarts-for-react")[0].oncontextmenu =      function () {
-      	return false;
+      return false;
     };
   }, []);
 
@@ -445,20 +446,25 @@ const Screens = (props) => {
             const { data, dataType, value } = params;
             if (dataType === "node") {
               let formList = [];
-              const isFirstPath = data?.name?.split("_")[0].replace("层级", "") == 1;
+              const isFirstPath =                data?.name?.split("_")[0].replace("层级", "") == 1;
               const getSum = key => formList?.reduce((cur, pre) => cur + pre?.[key], 0);
               if (isFirstPath) {
                 formList = links?.filter(i => i?.source === data?.name);
               } else {
                 formList = links?.filter(i => i?.target === data?.name);
               }
-              return `${
-                hierarchyToLv(i18n, data?.name)
-              }<br/>Session：${value?.toLocaleString()}<br/>PV：${getSum("pv")?.toLocaleString()}<br/>${t("user")}：${getSum("user")?.toLocaleString()}`;
+              return `${hierarchyToLv(i18n, data?.name)}<br/>
+              Session：${value?.toLocaleString()}<br/>
+              PV：${getSum("pv")?.toLocaleString()}<br/>
+              ${t("user")}：${getSum("user")?.toLocaleString()}`;
             }
-            return `${hierarchyToLv(i18n, data?.source)}<br/>${
-              hierarchyToLv(i18n, data?.target)
-            }<br/>Session：${data.value?.toLocaleString()}<br/>PV：${data.pv?.toLocaleString()}<br/>User：${data.user?.toLocaleString()}`;
+            return `${hierarchyToLv(i18n, data?.source)}<br/>${hierarchyToLv(
+              i18n,
+              data?.target,
+            )}<br/>Session：${data.value?.toLocaleString()}<br/>
+            PV：${data.pv?.toLocaleString()}<br/>
+            User：${data.user?.toLocaleString()}
+            `;
           },
         },
         series: [
@@ -978,8 +984,8 @@ const Screens = (props) => {
                       style={{
                         height:
                           active && echartHeight === "6rem"
-                          	? "100%"
-                          	: echartHeight,
+                            ? "100%"
+                            : echartHeight,
                         width: "99.9%",
                       }}
                       showLoading={loading}

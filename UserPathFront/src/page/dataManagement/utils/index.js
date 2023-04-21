@@ -1,8 +1,9 @@
 /*
  * Tencent is pleased to support the open source community by making SessionAnalytics-用户路径分析框架 available.
  *
- * Copyright (C) 2023 THL A29 Limited, a Tencent company.  All rights reserved. The below software in this distribution may have been modified by THL A29 Limited ("Tencent Modifications"). All Tencent Modifications are
- * Copyright (C) THL A29 Limited.
+ * Copyright (C) 2023 THL A29 Limited, a Tencent company.  All rights reserved.
+ * The below software in this distribution may have been modified by THL A29 Limited ("Tencent Modifications").
+ * All Tencent Modifications are Copyright (C) THL A29 Limited.
  * SessionAnalytics-用户路径分析框架 is licensed under the MIT License except for the third-party components listed below.
  */
 
@@ -78,6 +79,8 @@ export const getCommPreviewColums = t => [
  *  en:英文版本
  */
 export const downloadUlr = {
-  cn: "https://mdp-1251316161.cos.ap-guangzhou.myqcloud.com/excel/%E7%94%A8%E6%88%B7session%E5%88%86%E6%9E%90%E6%97%A5%E5%BF%97%E4%B8%8A%E4%BC%A0%E6%A8%A1%E6%9D%BF.csv",
-  en: "https://mdp-1251316161.cos.ap-guangzhou.myqcloud.com/excel/User%20session%20analysis%20log%20upload%20template.csv",
+  cn: `https://mdp-1251316161.cos.ap-guangzhou.myqcloud.com/excel
+      /%E7%94%A8%E6%88%B7session%E5%88%86%E6%9E%90%E6%97%A5%E5%BF%97%E4%B8%8A%E4%BC%A0%E6%A8%A1%E6%9D%BF.csv`,
+  en: `https://mdp-1251316161.cos.ap-guangzhou.myqcloud.com/excel/
+      User%20session%20analysis%20log%20upload%20template.csv`,
 };

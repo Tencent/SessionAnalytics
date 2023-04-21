@@ -33,6 +33,6 @@ module.exports = {
     "no-useless-escape": "off",
     "react/display-name": "off",
     "no-dupe-keys": "off",
-    "max-len": ["error", { code: 300 }],
+    "max-len": ["error", { code: 120 }],
   },
 };
