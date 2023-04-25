@@ -3,7 +3,8 @@
 ## 导语
 SessionAnalytics是一个基于互联网用户Session会话的用户路径分析和挖掘框架，综合利用OLAP、数据挖掘、数据可视化等前沿技术，在互联网业务的用户流量和路径分析中，为产品、运营、商业化等企业数据用户提供强大和友好的数据洞察功能。在数据治理、数据分析、数据挖掘等场景，大幅提升数据科学家和工程师的工作效率。
 
-![image](https://user-images.githubusercontent.com/34958046/234150610-4acb2e96-2738-4e0a-bada-32c95d40862f.png)
+
+![image](https://user-images.githubusercontent.com/34958046/234169685-008a60b0-ebb8-48c8-acbb-ae6a4f569b69.png)
 
 
 
