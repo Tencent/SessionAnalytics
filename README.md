@@ -8,7 +8,7 @@ SessionAnalytics是一个基于互联网用户Session会话的用户路径分析
 
 
 
-感谢项目核心成员Eric@ericliuyuan、Jane@jane、Qilin@sessionpath、Cibin@zcb1008 在需求分析、产品设计、挖掘算法、系统开发等关键环节的深度技术探索和优化。
+感谢项目核心成员Eric@ericliuyuan、Jane@JaneBaiJie、Qilin@sessionpath、Cibin@zcb1008 在需求分析、产品设计、挖掘算法、系统开发等关键环节的深度技术探索和优化。
 
 感谢数据科学家Haley@yanhuiru33、Luciano@BigPlato、Laura@jihl97 提供宝贵的算法和模型优化建议。
 
