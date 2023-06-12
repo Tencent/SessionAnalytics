@@ -451,5 +451,14 @@ CREATE TABLE `t_session_single_networkx` (
   KEY idx_user_scene_version_make(f_user_scene_version_id,f_make_version_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='特征向量中心度的计算值'
 
+CREATE TABLE `t_user` (
+  `id` int(10) NOT NULL AUTO_INCREMENT COMMENT '自增id',
+  `username` varchar(128) DEFAULT NULL COMMENT '用户名',
+  `password` varchar(128) DEFAULT NULL COMMENT '密码',
+  `f_create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `f_update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE = InnoDB AUTO_INCREMENT = 45 DEFAULT CHARSET = utf8 COMMENT = '用户名密码表'
+
 
 
