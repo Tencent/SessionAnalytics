@@ -87,7 +87,7 @@ mysql5.7
 ```bash
 git clone https://github.com/Tencent/SessionAnalytics.git
 ```
-### 3..编译及运行
+### 3.编译及运行
 
 ```bash
 #react
@@ -103,7 +103,11 @@ application.yml #本地开发环境
 application_prod.yml #正式环境   
 application_test.yml #测试环境
 ```
-
+### 4.上传文件模板
+```
+存放位置：
+/SessionAnalytics/UserPathFront/public/
+```
 
 ## 未来规划：
 
