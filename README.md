@@ -109,15 +109,17 @@ application_test.yml #测试环境
 /SessionAnalytics/UserPathFront/public/
 ```
 ### 5.补充
+```
 1.[中文demo文件](https://github.com/Tencent/SessionAnalytics/blob/main/UserPathFront/public/%E4%BF%A1%E6%81%AF%E6%B5%81.csv)存放于 /SessionAnalytics/UserPathFront/public/信息流.csv,按相关模板上传csv文件，可尝试通过上传信息流demo文件熟悉相关流程
 2.上传流程
-(1) 数据上传页面点击上传csv跳转上传页面进行文件上传
-(2) 在数据清洗页面对上传的原始数据集清洗修改，如不需该步骤可忽略
-(3) 在数据切分页面对数据集进行切分，观察数据切分状态，如切分完成，页面可见数据集对应的相关视图
+  (1) 数据上传页面点击上传csv跳转上传页面进行文件上传
+  (2) 在数据清洗页面对上传的原始数据集清洗修改，如不需该步骤可忽略
+  (3) 在数据切分页面对数据集进行切分，观察数据切分状态，如切分完成，页面可见数据集对应的相关视图
 3. 路由权限相关
-(1) 前端路由对应文件路径为 /SessionAnalytics/blob/main/UserPathFront/src/routes/index.jsx，包含所有路由
-(2) 默认显示路由对应[navList](https://github.com/Tencent/SessionAnalytics/blob/main/UserPathFront/src/store/user.js)字段，字段数组对应路由的key值，可进行配置
-(3) 路由权限也提供[role/getRoleInfo](https://github.com/Tencent/SessionAnalytics/blob/main/UserPathFront/src/server/trend.js)接口进行配置，如需可修改相关逻辑，如不需该步骤可忽略
+  (1) 前端路由对应文件路径为 /SessionAnalytics/blob/main/UserPathFront/src/routes/index.jsx，包含所有路由
+  (2) 默认显示路由对应[navList](https://github.com/Tencent/SessionAnalytics/blob/main/UserPathFront/src/store/user.js)字段，字段数组对应路由的key值，可进行配置
+  (3) 路由权限也提供[role/getRoleInfo](https://github.com/Tencent/SessionAnalytics/blob/main/UserPathFront/src/server/trend.js)接口进行配置，如需可修改相关逻辑，如不需该步骤可忽略
+```
 
 ## 未来规划：
 
