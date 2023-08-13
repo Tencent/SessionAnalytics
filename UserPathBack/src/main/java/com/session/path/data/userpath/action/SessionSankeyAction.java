@@ -9,39 +9,23 @@
 
 package com.session.path.data.userpath.action;
 
-import com.session.path.data.userpath.dto.BaseRsp;
-import com.session.path.data.userpath.dto.ReqSankeyDimCategoryDto;
-import com.session.path.data.userpath.dto.ReqSankeyDimEventDto;
-import com.session.path.data.userpath.dto.ReqSankeyDimSubDto;
-import com.session.path.data.userpath.dto.ReqTreeCategoryDto;
-import com.session.path.data.userpath.dto.ReqTreeEventDto;
-import com.session.path.data.userpath.dto.ReqTreeSubDto;
-import com.session.path.data.userpath.dto.RspPage;
-import com.session.path.data.userpath.repository.SessionDistinctEventRepository;
-import com.session.path.data.userpath.repository.SessionEventRepository;
-import com.session.path.data.userpath.repository.SessionNodeRepository;
-import com.session.path.data.userpath.repository.SessionSingleRepository;
-import com.session.path.data.userpath.repository.UserLogUploadStatusRepository;
+import com.session.path.data.userpath.dto.*;
+import com.session.path.data.userpath.repository.*;
 import com.session.path.data.userpath.util.BizCode;
 import com.session.path.data.userpath.util.CommonUtil;
 import com.session.path.data.userpath.util.CsvExportUtil;
-import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName SessionSankeyAction
@@ -81,9 +65,24 @@ public class SessionSankeyAction extends BaseAction {
      * @return
      */
 
-    @PostMapping("/getSessionEventEntity")
+    @GetMapping("/getSessionEventEntity")
     public BaseRsp getSessionEventEntity(HttpServletRequest httpServletRequest,
-            @RequestBody ReqTreeEventDto reqSankeyEventDto
+                                        @RequestParam("from_layer") int fromLayer,
+                                        @RequestParam("to_layer") int toLayer,
+                                        @RequestParam("f_session_num_start") int fSessionNumStart,
+                                        @RequestParam("f_session_num_end") int fSessionNumEnd,
+                                        @RequestParam("f_pv_num_start") int fPVNumStart,
+                                        @RequestParam("f_pv_num_end") int fPVNumEnd,
+                                        @RequestParam("f_user_num_start") int fUserNumStart,
+                                        @RequestParam("f_user_num_end") int fUserNumEnd,
+                                        @RequestParam("f_category_from") String fCategoryFrom,
+                                        @RequestParam("f_category") String fCategory,
+                                        @RequestParam("f_subcategory_from") String fSubcategoryFrom,
+                                        @RequestParam("f_subcategory") String fSubcategory,
+                                        @RequestParam("f_event_from") String fEventFrom,
+                                        @RequestParam("f_event") String fEvent,
+                                        @RequestParam("f_upload_name") String fUploadName,
+                                        @RequestParam("f_upload_user") String fUploadUser
     ) {
         LOGGER.info("获取session event");
         BaseRsp baseRsp = new BaseRsp();
@@ -92,32 +91,32 @@ public class SessionSankeyAction extends BaseAction {
         try {
             CommonUtil.getToken(httpServletRequest);
             int fMakeVersionId = userLogUploadStatusRepository
-                    .getMakeVersionId(reqSankeyEventDto.getFUploadName(),reqSankeyEventDto.getFUploadUser())
+                    .getMakeVersionId(fUploadName,fUploadUser)
                     .get("f_make_version_id");
             String fUserSceneVersionId = userLogUploadStatusRepository
-                    .getUserSceneVersionId(reqSankeyEventDto.getFUploadName(),reqSankeyEventDto.getFUploadUser())
+                    .getUserSceneVersionId(fUploadName,fUploadUser)
                     .get("f_user_scene_version_id");
 
-            String [] categoryArr = reqSankeyEventDto.getFCategoryFrom().split(",");
+            String [] categoryArr = fCategoryFrom.split(",");
 
-            String [] subcategoryArr = reqSankeyEventDto.getFSubcategoryFrom().split(",");
+            String [] subcategoryArr = fSubcategoryFrom.split(",");
 
-            String [] eventArr = reqSankeyEventDto.getFEventFrom().split(",");
+            String [] eventArr = fEventFrom.split(",");
 
             resList = sessionEventRepository
                     .getSessionEventEntity(
                             fUserSceneVersionId,fMakeVersionId, categoryArr[0], subcategoryArr[0],eventArr[0],
-                            reqSankeyEventDto.getFromLayer(),
-                            reqSankeyEventDto.getToLayer(),
-                            reqSankeyEventDto.getFSessionNumStart(),
-                            reqSankeyEventDto.getFCategory(),
-                            reqSankeyEventDto.getFSubcategory(),
-                            reqSankeyEventDto.getFEvent(),
-                            reqSankeyEventDto.getFSessionNumEnd(),
-                            reqSankeyEventDto.getFUserNumStart(),
-                            reqSankeyEventDto.getFUserNumEnd(),
-                            reqSankeyEventDto.getFPVNumStart(),
-                            reqSankeyEventDto.getFPVNumEnd(),
+                            fromLayer,
+                            toLayer,
+                            fSessionNumStart,
+                            fCategory,
+                            fSubcategory,
+                            fEvent,
+                            fSessionNumEnd,
+                            fUserNumStart,
+                            fUserNumEnd,
+                            fPVNumStart,
+                            fPVNumEnd,
                             categoryArr[1],subcategoryArr[1],eventArr[1],
                             categoryArr[2],subcategoryArr[2],eventArr[2],
                             categoryArr[3],subcategoryArr[3],eventArr[3],
@@ -134,8 +133,6 @@ public class SessionSankeyAction extends BaseAction {
         return baseRsp;
     }
 
-
-
     /**
      * 获取桑基图页面事件分析结果（不去重）
      *
@@ -144,7 +141,7 @@ public class SessionSankeyAction extends BaseAction {
 
     @PostMapping("/getSessionDimEventDetailEntity")
     public BaseRsp getSessionDimEventDetailEntity(HttpServletRequest httpServletRequest,
-            @RequestBody ReqSankeyDimEventDto reqSankeyEventDim
+                                                  @RequestBody ReqSankeyDimEventDto reqSankeyEventDim
     ) {
         LOGGER.info("获取session event");
         BaseRsp baseRsp = new BaseRsp();
@@ -301,7 +298,7 @@ public class SessionSankeyAction extends BaseAction {
 
     @PostMapping("/getSessionDimEventDistinctEntity")
     public BaseRsp getSessionDimEventDistinctEntity(HttpServletRequest httpServletRequest,
-            @RequestBody ReqSankeyDimEventDto reqSankeyEventDimD
+                                                    @RequestBody ReqSankeyDimEventDto reqSankeyEventDimD
 
     ) {
         LOGGER.info("获取session event dim distinct 分析");
@@ -450,10 +447,6 @@ public class SessionSankeyAction extends BaseAction {
         return baseRsp;
     }
 
-
-
-
-
     /**
      * 获取桑基图大类筛选列表及示例图结果-无层级
      *
@@ -461,8 +454,8 @@ public class SessionSankeyAction extends BaseAction {
      */
     @GetMapping("/getSessionEventCategorySample")
     public BaseRsp getSessionEventCategorySample(HttpServletRequest httpServletRequest,
-            @RequestParam("f_upload_name") String fUploadName,
-            @RequestParam("f_upload_user") String fUploadUser
+                                                 @RequestParam("f_upload_name") String fUploadName,
+                                                 @RequestParam("f_upload_user") String fUploadUser
     ) {
         LOGGER.info("获取session category(示例图)");
         BaseRsp baseRsp = new BaseRsp();
@@ -512,8 +505,8 @@ public class SessionSankeyAction extends BaseAction {
 
     @GetMapping("/getSessionEventSubCategorySample")
     public BaseRsp getSessionEventSubCategorySample(HttpServletRequest httpServletRequest,
-            @RequestParam("f_upload_name") String fUploadName,
-            @RequestParam("f_upload_user") String fUploadUser) {
+                                                    @RequestParam("f_upload_name") String fUploadName,
+                                                    @RequestParam("f_upload_user") String fUploadUser) {
         LOGGER.info("获取subcategory 无层级");
         BaseRsp baseRsp = new BaseRsp();
         RspPage rspPage = new RspPage();
@@ -559,8 +552,8 @@ public class SessionSankeyAction extends BaseAction {
 
     @GetMapping("/getSessionEventSample")
     public BaseRsp getSessionEventSample(HttpServletRequest httpServletRequest,
-            @RequestParam("f_upload_name") String fUploadName,
-            @RequestParam("f_upload_user") String fUploadUser) {
+                                         @RequestParam("f_upload_name") String fUploadName,
+                                         @RequestParam("f_upload_user") String fUploadUser) {
         LOGGER.info("获取event 无层级");
         BaseRsp baseRsp = new BaseRsp();
         RspPage rspPage = new RspPage();
@@ -603,8 +596,8 @@ public class SessionSankeyAction extends BaseAction {
 
     @GetMapping("/getSessionEventCategoryList")
     public BaseRsp getSessionEventCategoryList(HttpServletRequest httpServletRequest,
-            @RequestParam("f_upload_name") String fUploadName,
-            @RequestParam("f_upload_user") String fUploadUser) {
+                                               @RequestParam("f_upload_name") String fUploadName,
+                                               @RequestParam("f_upload_user") String fUploadUser) {
         LOGGER.info("获取session category");
         BaseRsp baseRsp = new BaseRsp();
         RspPage rspPage = new RspPage();
@@ -640,9 +633,9 @@ public class SessionSankeyAction extends BaseAction {
 
     @GetMapping("/getSessionEventSubCategoryList")
     public BaseRsp getSessionEventSubCategoryList(HttpServletRequest httpServletRequest,
-            @RequestParam("f_upload_name") String fUploadName,
-            @RequestParam("f_upload_user") String fUploadUser,
-            @RequestParam(value = "f_category_from", required = false) String fCategoryFrom
+                                                  @RequestParam("f_upload_name") String fUploadName,
+                                                  @RequestParam("f_upload_user") String fUploadUser,
+                                                  @RequestParam(value = "f_category_from", required = false) String fCategoryFrom
     ) {
         LOGGER.info("获取session subcategory列表");
         BaseRsp baseRsp = new BaseRsp();
@@ -680,10 +673,10 @@ public class SessionSankeyAction extends BaseAction {
 
     @GetMapping("/getSessionEventList")
     public BaseRsp getSessionEventList(HttpServletRequest httpServletRequest,
-            @RequestParam("f_upload_name") String fUploadName,
-            @RequestParam("f_upload_user") String fUploadUser,
-            @RequestParam(value = "f_category_from", required = false) String fCategoryFrom,
-            @RequestParam(value = "f_subcategory_from", required = false) String fSubcategoryFrom) {
+                                       @RequestParam("f_upload_name") String fUploadName,
+                                       @RequestParam("f_upload_user") String fUploadUser,
+                                       @RequestParam(value = "f_category_from", required = false) String fCategoryFrom,
+                                       @RequestParam(value = "f_subcategory_from", required = false) String fSubcategoryFrom) {
         LOGGER.info("获取session event list");
         BaseRsp baseRsp = new BaseRsp();
         RspPage rspPage = new RspPage();
@@ -717,10 +710,22 @@ public class SessionSankeyAction extends BaseAction {
      * @return
      */
 
-    @PostMapping("/getSessionSubcategoryEntity")
+    @GetMapping("/getSessionSubcategoryEntity")
     public BaseRsp getSessionSubcategoryEntity(HttpServletRequest httpServletRequest,
-            @RequestBody ReqTreeSubDto reqSankeySub
-
+                                               @RequestParam("from_layer") int fromLayer,
+                                               @RequestParam("to_layer") int toLayer,
+                                               @RequestParam("f_session_num_start") int fSessionNumStart,
+                                               @RequestParam("f_session_num_end") int fSessionNumEnd,
+                                               @RequestParam("f_pv_num_start") int fPVNumStart,
+                                               @RequestParam("f_pv_num_end") int fPVNumEnd,
+                                               @RequestParam("f_user_num_start") int fUserNumStart,
+                                               @RequestParam("f_user_num_end") int fUserNumEnd,
+                                               @RequestParam("f_category_from") String fCategoryFrom,
+                                               @RequestParam("f_category") String fCategory,
+                                               @RequestParam("f_subcategory_from") String fSubcategoryFrom,
+                                               @RequestParam("f_subcategory") String fSubcategory,
+                                               @RequestParam("f_upload_name") String fUploadName,
+                                               @RequestParam("f_upload_user") String fUploadUser
     ) {
         LOGGER.info("获取session Subcategory detail 分析");
         BaseRsp baseRsp = new BaseRsp();
@@ -729,26 +734,26 @@ public class SessionSankeyAction extends BaseAction {
         try {
             CommonUtil.getToken(httpServletRequest);
             int fMakeVersionId = userLogUploadStatusRepository
-                    .getMakeVersionId(reqSankeySub.getFUploadName(),reqSankeySub.getFUploadUser())
+                    .getMakeVersionId(fUploadName,fUploadUser)
                     .get("f_make_version_id");
 
             String fUserSceneVersionId = userLogUploadStatusRepository
-                    .getUserSceneVersionId(reqSankeySub.getFUploadName(),reqSankeySub.getFUploadUser())
+                    .getUserSceneVersionId(fUploadName,fUploadUser)
                     .get("f_user_scene_version_id");
 
-            String [] categoryArr = reqSankeySub.getFCategoryFrom().split(",");
+            String [] categoryArr = fCategoryFrom.split(",");
 
-            String [] subcategoryArr = reqSankeySub.getFSubcategoryFrom().split(",");
+            String [] subcategoryArr = fSubcategoryFrom.split(",");
 
             resList = sessionEventRepository
                     .getSessionSubcategoryEntity(
                             fUserSceneVersionId,fMakeVersionId, categoryArr[0], subcategoryArr[0],
-                            reqSankeySub.getFromLayer(), reqSankeySub.getToLayer(),
-                            reqSankeySub.getFSessionNumStart(),
-                            reqSankeySub.getFCategory(), reqSankeySub.getFSubcategory(),
-                            reqSankeySub.getFSessionNumEnd(),
-                            reqSankeySub.getFUserNumStart(),reqSankeySub.getFUserNumEnd(),
-                            reqSankeySub.getFPVNumStart(),reqSankeySub.getFPVNumEnd(),
+                            fromLayer, toLayer,
+                            fSessionNumStart,
+                            fCategory, fSubcategory,
+                            fSessionNumEnd,
+                            fUserNumStart,fUserNumEnd,
+                            fPVNumStart,fPVNumEnd,
                             categoryArr[1],subcategoryArr[1],categoryArr[2],subcategoryArr[2],
                             categoryArr[3],subcategoryArr[3],categoryArr[4],subcategoryArr[4]);
 
@@ -773,7 +778,7 @@ public class SessionSankeyAction extends BaseAction {
 
     @PostMapping("/getDimSubcategoryDetailEntity")
     public BaseRsp getDimSubcategoryDetailEntity(HttpServletRequest httpServletRequest,
-            @RequestBody ReqSankeyDimSubDto reqSubSankeyDim
+                                                 @RequestBody ReqSankeyDimSubDto reqSubSankeyDim
     ) {
         LOGGER.info("获取session subcategory dim 分析");
         BaseRsp baseRsp = new BaseRsp();
@@ -915,9 +920,20 @@ public class SessionSankeyAction extends BaseAction {
      * @return
      */
 
-    @PostMapping("/getSessionCategoryEntity")
+    @GetMapping("/getSessionCategoryEntity")
     public BaseRsp getSessionCategoryEntity(HttpServletRequest httpServletRequest,
-            @RequestBody ReqTreeCategoryDto reqCateSankey
+                                            @RequestParam("from_layer") int fromLayer,
+                                            @RequestParam("to_layer") int toLayer,
+                                            @RequestParam("f_session_num_start") int fSessionNumStart,
+                                            @RequestParam("f_session_num_end") int fSessionNumEnd,
+                                            @RequestParam("f_pv_num_start") int fPVNumStart,
+                                            @RequestParam("f_pv_num_end") int fPVNumEnd,
+                                            @RequestParam("f_user_num_start") int fUserNumStart,
+                                            @RequestParam("f_user_num_end") int fUserNumEnd,
+                                            @RequestParam("f_category_from") String fCategoryFrom,
+                                            @RequestParam("f_category") String fCategory,
+                                            @RequestParam("f_upload_name") String fUploadName,
+                                            @RequestParam("f_upload_user") String fUploadUser
     ) {
         LOGGER.info("获取session Category");
         BaseRsp baseRsp = new BaseRsp();
@@ -926,23 +942,23 @@ public class SessionSankeyAction extends BaseAction {
         try {
             CommonUtil.getToken(httpServletRequest);
             int fMakeVersionId = userLogUploadStatusRepository
-                    .getMakeVersionId(reqCateSankey.getFUploadName(),reqCateSankey.getFUploadUser())
+                    .getMakeVersionId(fUploadName,fUploadUser)
                     .get("f_make_version_id");
 
             String fUserSceneVersionId = userLogUploadStatusRepository
-                    .getUserSceneVersionId(reqCateSankey.getFUploadName(),reqCateSankey.getFUploadUser())
+                    .getUserSceneVersionId(fUploadName,fUploadUser)
                     .get("f_user_scene_version_id");
 
 
-            String [] categoryArr = reqCateSankey.getFCategoryFrom().split(",");
+            String [] categoryArr = fCategoryFrom.split(",");
 
             resList = sessionEventRepository
                     .getSessionCategoryEntity(fUserSceneVersionId,fMakeVersionId, categoryArr[0],
-                            reqCateSankey.getFromLayer(), reqCateSankey.getToLayer(),
-                            reqCateSankey.getFSessionNumStart(),
-                            reqCateSankey.getFCategory(), reqCateSankey.getFSessionNumEnd(),
-                            reqCateSankey.getFUserNumStart(),reqCateSankey.getFUserNumEnd(),
-                            reqCateSankey.getFPVNumStart(),reqCateSankey.getFPVNumEnd(),
+                            fromLayer, toLayer,
+                            fSessionNumStart,
+                            fCategory, fSessionNumEnd,
+                            fUserNumStart,fUserNumEnd,
+                            fPVNumStart,fPVNumEnd,
                             categoryArr[1],categoryArr[2],categoryArr[3],categoryArr[4]);
 
             rspPage.list = resList;
@@ -963,9 +979,24 @@ public class SessionSankeyAction extends BaseAction {
      * @return
      */
 
-    @PostMapping("/getSessionEventDistinctEntity")
+    @GetMapping("/getSessionEventDistinctEntity")
     public BaseRsp getSessionEventDistinctEntity(HttpServletRequest httpServletRequest,
-            @RequestBody ReqTreeEventDto reqEventSankeyD
+                                                 @RequestParam("from_layer") int fromLayer,
+                                                 @RequestParam("to_layer") int toLayer,
+                                                 @RequestParam("f_session_num_start") int fSessionNumStart,
+                                                 @RequestParam("f_session_num_end") int fSessionNumEnd,
+                                                 @RequestParam("f_pv_num_start") int fPVNumStart,
+                                                 @RequestParam("f_pv_num_end") int fPVNumEnd,
+                                                 @RequestParam("f_user_num_start") int fUserNumStart,
+                                                 @RequestParam("f_user_num_end") int fUserNumEnd,
+                                                 @RequestParam("f_category_from") String fCategoryFrom,
+                                                 @RequestParam("f_category") String fCategory,
+                                                 @RequestParam("f_subcategory_from") String fSubcategoryFrom,
+                                                 @RequestParam("f_subcategory") String fSubcategory,
+                                                 @RequestParam("f_event_from") String fEventFrom,
+                                                 @RequestParam("f_event") String fEvent,
+                                                 @RequestParam("f_upload_name") String fUploadName,
+                                                 @RequestParam("f_upload_user") String fUploadUser
     ) {
         LOGGER.info("获取session event");
         BaseRsp baseRsp = new BaseRsp();
@@ -974,31 +1005,31 @@ public class SessionSankeyAction extends BaseAction {
         try {
             CommonUtil.getToken(httpServletRequest);
             int fMakeVersionId = userLogUploadStatusRepository
-                    .getMakeVersionId(reqEventSankeyD.getFUploadName(),reqEventSankeyD.getFUploadUser())
+                    .getMakeVersionId(fUploadName,fUploadUser)
                     .get("f_make_version_id");
 
             String fUserSceneVersionId = userLogUploadStatusRepository
-                    .getUserSceneVersionId(reqEventSankeyD.getFUploadName(),reqEventSankeyD.getFUploadUser())
+                    .getUserSceneVersionId(fUploadName,fUploadUser)
                     .get("f_user_scene_version_id");
 
 
-            String [] categoryArr = reqEventSankeyD.getFCategoryFrom().split(",");
+            String [] categoryArr = fCategoryFrom.split(",");
 
-            String [] subcategoryArr = reqEventSankeyD.getFSubcategoryFrom().split(",");
+            String [] subcategoryArr = fSubcategoryFrom.split(",");
 
-            String [] eventArr = reqEventSankeyD.getFEventFrom().split(",");
+            String [] eventArr = fEventFrom.split(",");
 
             resList = sessionDistinctEventRepository
                     .getSessionEventDistinctEntity(
                             fUserSceneVersionId,fMakeVersionId, categoryArr[0], subcategoryArr[0],eventArr[0],
-                            reqEventSankeyD.getFromLayer(),reqEventSankeyD.getToLayer(),
-                            reqEventSankeyD.getFSessionNumStart(),
-                            reqEventSankeyD.getFCategory(),
-                            reqEventSankeyD.getFSubcategory(),reqEventSankeyD.getFEvent(),
-                            reqEventSankeyD.getFSessionNumEnd(),
-                            reqEventSankeyD.getFUserNumStart(),reqEventSankeyD.getFUserNumEnd(),
-                            reqEventSankeyD.getFPVNumStart(),
-                            reqEventSankeyD.getFPVNumEnd(),
+                            fromLayer,toLayer,
+                            fSessionNumStart,
+                            fCategory,
+                            fSubcategory,fEvent,
+                            fSessionNumEnd,
+                            fUserNumStart,fUserNumEnd,
+                            fPVNumStart,
+                            fPVNumEnd,
                             categoryArr[1],subcategoryArr[1],eventArr[1],
                             categoryArr[2],subcategoryArr[2],eventArr[2],
                             categoryArr[3],subcategoryArr[3],eventArr[3],
@@ -1024,10 +1055,22 @@ public class SessionSankeyAction extends BaseAction {
      * @return
      */
 
-    @PostMapping("/getSessionSubcategoryDistinctEntity")
+    @GetMapping("/getSessionSubcategoryDistinctEntity")
     public BaseRsp getSessionSubcategoryDistinctEntity(HttpServletRequest httpServletRequest,
-            @RequestBody ReqTreeSubDto reqSubSankeyD
-
+                                                       @RequestParam("from_layer") int fromLayer,
+                                                       @RequestParam("to_layer") int toLayer,
+                                                       @RequestParam("f_session_num_start") int fSessionNumStart,
+                                                       @RequestParam("f_session_num_end") int fSessionNumEnd,
+                                                       @RequestParam("f_pv_num_start") int fPVNumStart,
+                                                       @RequestParam("f_pv_num_end") int fPVNumEnd,
+                                                       @RequestParam("f_user_num_start") int fUserNumStart,
+                                                       @RequestParam("f_user_num_end") int fUserNumEnd,
+                                                       @RequestParam("f_category_from") String fCategoryFrom,
+                                                       @RequestParam("f_category") String fCategory,
+                                                       @RequestParam("f_subcategory") String fSubcategory,
+                                                       @RequestParam("f_subcategory_from") String fSubcategoryFrom,
+                                                       @RequestParam("f_upload_name") String fUploadName,
+                                                       @RequestParam("f_upload_user") String fUploadUser
     ) {
         LOGGER.info("获取session Subcategory distinct");
         BaseRsp baseRsp = new BaseRsp();
@@ -1036,27 +1079,27 @@ public class SessionSankeyAction extends BaseAction {
         try {
             CommonUtil.getToken(httpServletRequest);
             int fMakeVersionId = userLogUploadStatusRepository
-                    .getMakeVersionId(reqSubSankeyD.getFUploadName(),reqSubSankeyD.getFUploadUser())
+                    .getMakeVersionId(fUploadName,fUploadUser)
                     .get("f_make_version_id");
 
             String fUserSceneVersionId = userLogUploadStatusRepository
-                    .getUserSceneVersionId(reqSubSankeyD.getFUploadName(),reqSubSankeyD.getFUploadUser())
+                    .getUserSceneVersionId(fUploadName,fUploadUser)
                     .get("f_user_scene_version_id");
 
 
-            String [] categoryArr = reqSubSankeyD.getFCategoryFrom().split(",");
+            String [] categoryArr = fCategoryFrom.split(",");
 
-            String [] subcategoryArr = reqSubSankeyD.getFSubcategoryFrom().split(",");
+            String [] subcategoryArr = fSubcategoryFrom.split(",");
 
             resList = sessionDistinctEventRepository
                     .getSessionSubcategoryDistinctEntity(
                             fUserSceneVersionId,fMakeVersionId, categoryArr[0], subcategoryArr[0],
-                            reqSubSankeyD.getFromLayer(), reqSubSankeyD.getToLayer(),
-                            reqSubSankeyD.getFSessionNumStart(),
-                            reqSubSankeyD.getFCategory(), reqSubSankeyD.getFSubcategory(),
-                            reqSubSankeyD.getFSessionNumEnd(),
-                            reqSubSankeyD.getFUserNumStart(),reqSubSankeyD.getFUserNumEnd(),
-                            reqSubSankeyD.getFPVNumStart(),reqSubSankeyD.getFPVNumEnd(),
+                            fromLayer, toLayer,
+                            fSessionNumStart,
+                            fCategory, fSubcategory,
+                            fSessionNumEnd,
+                            fUserNumStart,fUserNumEnd,
+                            fPVNumStart,fPVNumEnd,
                             categoryArr[1],subcategoryArr[1],categoryArr[2],subcategoryArr[2],
                             categoryArr[3],subcategoryArr[3],categoryArr[4],subcategoryArr[4]);
             rspPage.list = resList;
@@ -1076,9 +1119,20 @@ public class SessionSankeyAction extends BaseAction {
      * @return
      */
 
-    @PostMapping("/getSessionCategoryDistinctEntity")
+    @GetMapping("/getSessionCategoryDistinctEntity")
     public BaseRsp getSessionCategoryDistinctEntity(HttpServletRequest httpServletRequest,
-            @RequestBody ReqTreeCategoryDto reqCateSankeyD
+                                                    @RequestParam("from_layer") int fromLayer,
+                                                    @RequestParam("to_layer") int toLayer,
+                                                    @RequestParam("f_session_num_start") int fSessionNumStart,
+                                                    @RequestParam("f_session_num_end") int fSessionNumEnd,
+                                                    @RequestParam("f_pv_num_start") int fPVNumStart,
+                                                    @RequestParam("f_pv_num_end") int fPVNumEnd,
+                                                    @RequestParam("f_user_num_start") int fUserNumStart,
+                                                    @RequestParam("f_user_num_end") int fUserNumEnd,
+                                                    @RequestParam("f_category_from") String fCategoryFrom,
+                                                    @RequestParam("f_category") String fCategory,
+                                                    @RequestParam("f_upload_name") String fUploadName,
+                                                    @RequestParam("f_upload_user") String fUploadUser
     ) {
         LOGGER.info("获取session Category");
         BaseRsp baseRsp = new BaseRsp();
@@ -1087,23 +1141,23 @@ public class SessionSankeyAction extends BaseAction {
         try {
             CommonUtil.getToken(httpServletRequest);
             int fMakeVersionId = userLogUploadStatusRepository
-                    .getMakeVersionId(reqCateSankeyD.getFUploadName(),reqCateSankeyD.getFUploadUser())
+                    .getMakeVersionId(fUploadName,fUploadUser)
                     .get("f_make_version_id");
 
             String fUserSceneVersionId = userLogUploadStatusRepository
-                    .getUserSceneVersionId(reqCateSankeyD.getFUploadName(),reqCateSankeyD.getFUploadUser())
+                    .getUserSceneVersionId(fUploadName,fUploadUser)
                     .get("f_user_scene_version_id");
 
 
-            String [] categoryArr = reqCateSankeyD.getFCategoryFrom().split(",");
+            String [] categoryArr = fCategoryFrom.split(",");
 
             resList = sessionDistinctEventRepository
                     .getSessionCategoryDistinctEntity(fUserSceneVersionId,fMakeVersionId,
-                            categoryArr[0], reqCateSankeyD.getFromLayer(), reqCateSankeyD.getToLayer(),
-                            reqCateSankeyD.getFSessionNumStart(),
-                            reqCateSankeyD.getFCategory(), reqCateSankeyD.getFSessionNumEnd(),
-                            reqCateSankeyD.getFUserNumStart(),reqCateSankeyD.getFUserNumEnd(),
-                            reqCateSankeyD.getFPVNumStart(),reqCateSankeyD.getFPVNumEnd(),
+                            categoryArr[0], fromLayer, toLayer,
+                            fSessionNumStart,
+                            fCategory, fSessionNumEnd,
+                            fUserNumStart,fUserNumEnd,
+                            fPVNumStart,fPVNumEnd,
                             categoryArr[1],categoryArr[2],categoryArr[3],categoryArr[4]);
 
             rspPage.list = resList;
@@ -1127,7 +1181,7 @@ public class SessionSankeyAction extends BaseAction {
 
     @PostMapping("/getSessionDimCategoryDetailEntity")
     public BaseRsp getSessionDimCategoryDetailEntity(HttpServletRequest httpServletRequest,
-            @RequestBody ReqSankeyDimCategoryDto reqCateDimSankeyD
+                                                     @RequestBody ReqSankeyDimCategoryDto reqCateDimSankeyD
     ) {
         LOGGER.info("获取session event");
         BaseRsp baseRsp = new BaseRsp();
@@ -1243,7 +1297,7 @@ public class SessionSankeyAction extends BaseAction {
 
     @PostMapping("/getSessionDimCategoryDistinctEntity")
     public BaseRsp getSessionDimCategoryDistinctEntity(HttpServletRequest httpServletRequest,
-            @RequestBody ReqSankeyDimCategoryDto reqCateDimDistinct
+                                                       @RequestBody ReqSankeyDimCategoryDto reqCateDimDistinct
 
     ) {
         LOGGER.info("获取session event");
@@ -1361,7 +1415,7 @@ public class SessionSankeyAction extends BaseAction {
 
     @PostMapping("/getDimSubCategoryDistinctEntity")
     public BaseRsp getDimSubCategoryDistinctEntity(HttpServletRequest httpServletRequest,
-            @RequestBody ReqSankeyDimSubDto reqSankeyDimSubDto
+                                                   @RequestBody ReqSankeyDimSubDto reqSankeyDimSubDto
 
     ) {
         LOGGER.info("获取session event");
@@ -1510,9 +1564,9 @@ public class SessionSankeyAction extends BaseAction {
 
     @GetMapping("/downloadNodeCsv")
     public BaseRsp downloadNodeCsv(HttpServletRequest httpServletRequest,
-            @RequestParam("f_upload_name") String fUploadName,
-            @RequestParam("f_upload_user") String fUploadUser,
-            HttpServletResponse response) {
+                                   @RequestParam("f_upload_name") String fUploadName,
+                                   @RequestParam("f_upload_user") String fUploadUser,
+                                   HttpServletResponse response) {
         LOGGER.info("导出csv文件");
         BaseRsp baseRsp = new BaseRsp();
         RspPage rspPage = new RspPage();
@@ -1564,9 +1618,9 @@ public class SessionSankeyAction extends BaseAction {
 
     @GetMapping("/downloadSingleCsv")
     public BaseRsp downloadSingleCsv(HttpServletRequest httpServletRequest,
-            @RequestParam("f_upload_name") String fUploadName,
-            @RequestParam("f_upload_user") String fUploadUser,
-            HttpServletResponse response) {
+                                     @RequestParam("f_upload_name") String fUploadName,
+                                     @RequestParam("f_upload_user") String fUploadUser,
+                                     HttpServletResponse response) {
         LOGGER.info("导出csv文件");
         BaseRsp baseRsp = new BaseRsp();
         RspPage rspPage = new RspPage();

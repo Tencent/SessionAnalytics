@@ -1,4 +1,4 @@
-package com.tencent.medical.data.userpath.util;
+package com.session.path.data.userpath.util;
 
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
