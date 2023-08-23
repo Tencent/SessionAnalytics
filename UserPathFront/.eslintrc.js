@@ -9,7 +9,6 @@ module.exports = {
   extends: [
     "eslint:recommended",
     "plugin:react/recommended",
-    "@tencent/eslint-config-tencent",
   ],
   overrides: [],
   parserOptions: {

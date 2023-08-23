@@ -21,7 +21,7 @@ const instance = axios.create({
 // axios请求拦截器
 instance.interceptors.request.use((config) => {
   const token = store?.state?.user?.token;
-  config.url = `/analytics${config.url}`;
+  config.url = `${config.url}`;
   config.headers.token = token;
   config.headers.user = store?.state?.user?.userInfo?.username;
   return config;

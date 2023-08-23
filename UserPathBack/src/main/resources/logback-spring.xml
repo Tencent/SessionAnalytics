@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <!-- 定义日志文件 输入位置 -->
-    <property name="log_dir" value="/dockerdata/logs/userpath" />
+    <property name="log_dir" value="/tmp/logs/userpath" />
     <!-- 日志最大的历史 30天 -->
     <!--    <property name="maxHistory" value="30"/>-->
 
