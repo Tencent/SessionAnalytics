@@ -492,7 +492,7 @@ const Governance = () => {
     );
     const params = {
       f_upload_name: topGovernance?.fuploadName,
-      f_json_array: JSON.stringify(jsonArray),
+      f_json_array: encodeURIComponent(JSON.stringify(jsonArray)),
     };
     await updateMakeUserLogTop(params);
   };
