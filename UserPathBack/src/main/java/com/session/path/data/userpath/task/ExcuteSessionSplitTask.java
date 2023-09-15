@@ -574,7 +574,7 @@ public class ExcuteSessionSplitTask implements Runnable {
     public void saveBatchSessionEventEntity(List<Map<String, Object>> list, String tablename) {
         try {
             logger.info("执行上传用户日志");
-            String initSql = "insert into" + tablename + "(f_age,f_sex,f_province,f_city,f_channel,"
+            String initSql = "insert into " + tablename + " (f_age,f_sex,f_province,f_city,f_channel,"
                     + "f_event_from,f_event_to,f_weight_session,f_weight_user,f_weight_pv,"
                     + "f_event_path,f_category_from,f_category_to,"
                     + "f_category_path,f_subcategory_from,f_subcategory_to,f_subcategory_path,"
